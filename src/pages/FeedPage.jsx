@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useUserStore } from "@/store/useUserStore";
 import { useLogout } from "@/hooks/useLogout";
 import { useFeed } from "@/hooks/useFeed";
+import { useSendConnectionRequest } from "@/hooks/useRequests";
 import logoImg from "@/assets/Logo.png";
 
 const formatProfile = (p, index) => {
@@ -57,6 +58,7 @@ export default function FeedPage() {
   const user = useUserStore((state) => state.user);
   const { mutate: logout } = useLogout();
   const { data: feedData, isLoading, isError, refetch } = useFeed();
+  const { mutate: sendRequest } = useSendConnectionRequest();
 
   const [profiles, setProfiles] = useState([]);
   const [history, setHistory] = useState([]);
@@ -99,12 +101,15 @@ export default function FeedPage() {
   const triggerAction = (type) => {
     if (!currentProfile) return;
 
-    if (type === "like") {
-      toast.success(`Liked ${currentProfile.name}!`);
+    const toUserId = currentProfile.id;
+
+    if (type === "like" || type === "superlike") {
+      // Backend expects status: "interested"
+      sendRequest({ status: "interested", toUserId });
     } else if (type === "nope") {
+      // Backend expects status: "ignored"
+      sendRequest({ status: "ignored", toUserId });
       toast.info(`Passed on ${currentProfile.name}`);
-    } else if (type === "superlike") {
-      toast.success(`Superliked ${currentProfile.name}! ⭐`);
     }
 
     setHistory((prev) => [currentProfile, ...prev]);

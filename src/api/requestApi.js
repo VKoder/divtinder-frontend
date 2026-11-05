@@ -26,6 +26,12 @@ export const fetchPendingRequests = async () => {
   }
 };
 
+export const sendConnectionRequest = async ({ status, toUserId }) => {
+  // status: "interested" | "ignored"
+  const response = await axiosClient.post(`/request/send/${status}/${toUserId}`);
+  return response.data;
+};
+
 export const reviewRequest = async ({ status, requestId }) => {
   // status: "accepted" | "rejected"
   try {
