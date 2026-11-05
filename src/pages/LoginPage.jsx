@@ -34,9 +34,9 @@ function LoginPage() {
       />
 
       {/* Header & Brand Mark */}
-      <header className="relative z-10 flex flex-col items-center text-center mt-2 mb-6 w-full max-w-sm">
+      <header className="relative z-10 flex flex-col items-center text-center mt-2 mb-6 w-full max-w-sm md:max-w-md">
         <div className="relative mb-3 flex items-center justify-center">
-          <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/10 border border-white/20 p-2.5">
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-lg shadow-black/10 border border-white/20 p-2.5">
             <img src={logoImg} alt="devBumble Logo" className="w-full h-full object-contain drop-shadow" />
           </div>
           <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -44,16 +44,16 @@ function LoginPage() {
             <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white" />
           </span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white drop-shadow-sm font-['Sora',sans-serif]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white drop-shadow-sm font-['Sora',sans-serif]">
           devBumble
         </h1>
-        <p className="text-sm font-medium text-white/90 mt-1">
+        <p className="text-sm md:text-base font-medium text-white/90 mt-1">
           Ignite meaningful connections.
         </p>
       </header>
 
       {/* Translucent Auth Card Container */}
-      <div className="relative z-10 w-full max-w-sm bg-white/15 backdrop-blur-xl rounded-3xl p-6 sm:p-7 shadow-2xl shadow-black/20 border border-white/20">
+      <div className="relative z-10 w-full max-w-sm md:max-w-md bg-white/15 backdrop-blur-xl rounded-3xl p-6 sm:p-7 md:p-9 shadow-2xl shadow-black/20 border border-white/20">
         <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Email Input Field */}
           <div className="flex flex-col text-left">
@@ -156,7 +156,7 @@ function LoginPage() {
       </div>
 
       {/* Legal Compliance Footer */}
-      <footer className="relative z-10 mt-6 text-center max-w-xs">
+      <footer className="relative z-10 mt-6 text-center max-w-xs md:max-w-sm">
         <p className="text-[11px] text-white/75 leading-relaxed">
           By signing in, you agree to our{" "}
           <span className="underline cursor-pointer hover:text-white">Terms of Service</span>{" "}

@@ -102,7 +102,7 @@ export default function LandingPage() {
       </div>
 
       {/* Top Bar: 18+ Verification & Help Badge */}
-      <header className="w-full max-w-sm flex items-center justify-between z-20">
+      <header className="w-full max-w-sm md:max-w-md lg:max-w-lg flex items-center justify-between z-20">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#fce0f7]/70 backdrop-blur-md shadow-sm border border-white/40">
           <span className="w-2 h-2 rounded-full bg-[#008561] inline-block shadow-[0_0_8px_rgba(0,133,97,0.8)] animate-pulse" />
           <span className="text-[11px] tracking-wider uppercase font-bold text-[#261626]">
@@ -119,7 +119,7 @@ export default function LandingPage() {
       </header>
 
       {/* Center Stage: Branding & Floating Card Deck */}
-      <main className="w-full max-w-sm flex flex-col items-center my-auto z-10 py-4">
+      <main className="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col items-center my-auto z-10 py-4">
         {/* Brand Lockup */}
         <div className="flex items-center gap-2.5 mb-1 cursor-default group">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#b40066] to-[#dd1d77] flex items-center justify-center shadow-lg shadow-[#b40066]/30 transform group-hover:rotate-12 group-hover:scale-105 transition-all duration-300 p-2">
@@ -314,7 +314,7 @@ export default function LandingPage() {
       </main>
 
       {/* Bottom Actions & Footer */}
-      <footer className="w-full max-w-sm flex flex-col items-center gap-2.5 z-20">
+      <footer className="w-full max-w-sm md:max-w-md lg:max-w-lg flex flex-col items-center gap-2.5 z-20">
         {/* Primary CTA: Create Account with Shimmer sweep */}
         <motion.button
           className="relative w-full h-[54px] rounded-full bg-gradient-to-r from-[#b40066] via-[#dc1a80] to-[#dd1d77] text-white font-['Sora',sans-serif] font-bold text-lg flex items-center justify-center gap-2 shadow-xl hover:shadow-[#b40066]/50 overflow-hidden cursor-pointer group"

@@ -71,7 +71,7 @@ export default function BottomNav({ activeTab: explicitTab }) {
       className="fixed bottom-4 inset-x-0 z-50 pb-safe px-4 pointer-events-none select-none"
     >
       {/* Apple visionOS Ultra-Translucent Frosted Glass Dock */}
-      <div className="max-w-[364px] mx-auto pointer-events-auto relative p-1.5 rounded-full bg-white/22 backdrop-blur-2xl backdrop-saturate-[190%] border border-white/45 shadow-[0_20px_48px_-10px_rgba(40,10,30,0.14),0_6px_20px_rgba(0,0,0,0.04),inset_0_1px_1.5px_rgba(255,255,255,0.75),inset_0_-1px_1px_rgba(255,255,255,0.2)] flex items-center justify-between">
+      <div className="w-full max-w-[364px] md:max-w-md mx-auto pointer-events-auto relative p-1.5 rounded-full bg-white/70 md:bg-white/80 backdrop-blur-2xl backdrop-saturate-[190%] border border-white/60 shadow-[0_20px_48px_-10px_rgba(40,10,30,0.14),0_6px_20px_rgba(0,0,0,0.06),inset_0_1px_1.5px_rgba(255,255,255,0.75)] flex items-center justify-between">
         {NAV_ITEMS.map((item) => {
           const isActive = activeTab === item.id;
 

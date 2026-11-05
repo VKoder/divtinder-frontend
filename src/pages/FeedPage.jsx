@@ -137,7 +137,7 @@ export default function FeedPage() {
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] antialiased flex flex-col min-h-screen select-none">
       {/* Header */}
       <header className="fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
-        <div className="h-16 px-4 flex items-center justify-between max-w-lg mx-auto">
+        <div className="h-16 px-4 flex items-center justify-between max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
           {/* User profile avatar / name */}
           <button
             onClick={() => navigate("/profile")}
@@ -196,10 +196,10 @@ export default function FeedPage() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-[#fff7fa]">
-        <div className="flex flex-col w-full px-4 pb-6 select-none max-w-lg mx-auto">
+      <main className="flex-1 flex flex-col justify-center relative w-full pt-16 pb-24 md:pb-28 bg-[#fff7fa]">
+        <div className="flex flex-col w-full px-4 pb-6 select-none max-w-lg md:max-w-xl mx-auto">
           {/* Card Stack Container (Fixed height - never resizes on photo change) */}
-          <div className="relative w-full max-w-[400px] h-[540px] max-h-[calc(100dvh-220px)] min-h-[480px] mx-auto flex items-center justify-center shrink-0">
+          <div className="relative w-full max-w-[400px] md:max-w-[440px] h-[540px] md:h-[580px] max-h-[calc(100dvh-200px)] min-h-[480px] mx-auto flex items-center justify-center shrink-0">
             {/* Loading Skeleton */}
             {isLoading && (
               <div className="w-full h-full rounded-[28px] bg-white border border-[#e1bdc7]/40 shadow-lg flex flex-col items-center justify-center gap-3 animate-pulse">
@@ -549,7 +549,7 @@ export default function FeedPage() {
                   animate={{ y: 0 }}
                   exit={{ y: "100%" }}
                   transition={{ type: "spring", damping: 25, stiffness: 240 }}
-                  className="fixed inset-x-0 bottom-0 z-50 max-w-[440px] mx-auto bg-white rounded-t-[28px] shadow-2xl p-6"
+                  className="fixed inset-x-0 bottom-0 z-50 max-w-[440px] md:max-w-lg mx-auto bg-white rounded-t-[28px] shadow-2xl p-6"
                 >
                   <div className="w-12 h-1 rounded-full bg-[#e1bdc7] mx-auto mb-4" />
                   <div className="flex items-center justify-between pb-3">

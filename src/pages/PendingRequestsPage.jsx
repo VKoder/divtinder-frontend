@@ -82,7 +82,7 @@ export default function PendingRequestsPage() {
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] antialiased flex flex-col min-h-screen selection:bg-[#b40066] selection:text-white select-none">
       {/* Header */}
       <header className="fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
-        <div className="h-16 px-4 flex items-center justify-between max-w-lg mx-auto">
+        <div className="h-16 px-4 flex items-center justify-between max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
           {/* User Profile Link */}
           <button
             onClick={() => navigate("/profile")}
@@ -173,7 +173,7 @@ export default function PendingRequestsPage() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-[#fff7fa] max-w-lg mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-[#fff7fa] max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
         <div className="flex flex-col w-full px-4 pb-8">
           {/* Segmented Top Tabs */}
           <div className="w-full pt-2 pb-3">
@@ -255,7 +255,7 @@ export default function PendingRequestsPage() {
 
           {/* Likes Grid */}
           {!isLoading && !isError && (
-            <div className="grid grid-cols-2 gap-3 w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 w-full">
               {requests.map((req) => {
                 const isItemProcessing = processingId === req.requestId;
 
@@ -480,7 +480,7 @@ export default function PendingRequestsPage() {
       {/* Inspect Profile Detail Modal */}
       {selectedRequest && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
-          <div className="w-full max-w-sm bg-white rounded-[28px] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="w-full max-w-sm md:max-w-md bg-white rounded-[28px] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="relative h-64 bg-[#ffe7fa]">
               <img
                 alt={selectedRequest.fullName}

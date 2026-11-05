@@ -223,7 +223,7 @@ export default function ProfilePage() {
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] antialiased min-h-screen flex flex-col select-none">
       {/* Header */}
       <header className="fixed top-0 w-full z-50 pt-safe bg-[#fff7fa]/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
-        <div className="h-16 px-4 flex items-center justify-between gap-2 max-w-lg mx-auto">
+        <div className="h-16 px-4 flex items-center justify-between gap-2 max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
           <button
             aria-label="Go back"
             className="min-w-[44px] min-h-[44px] -ml-1 flex items-center justify-center rounded-full text-[#261626] hover:bg-[#ffe7fa] active:scale-95 transition-all cursor-pointer"
@@ -259,7 +259,7 @@ export default function ProfilePage() {
       <main className="flex flex-col relative w-full pt-16 bg-[#fff7fa] flex-1">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col w-full px-4 pb-safe max-w-lg mx-auto"
+          className="flex flex-col w-full px-4 pb-safe max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto"
         >
           {/* Header Section */}
           <div className="pt-4 pb-3 flex flex-col gap-1">
@@ -718,7 +718,7 @@ export default function ProfilePage() {
 
           {/* Sticky Bottom Action Footer */}
           <div className="sticky bottom-0 left-0 right-0 pt-3 pb-24 bg-[#fff7fa]/90 backdrop-blur-md">
-            <div className="flex flex-col items-center gap-2.5 max-w-lg mx-auto">
+            <div className="flex flex-col items-center gap-2.5 max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               <button
                 disabled={isPending}
                 className="w-full h-14 rounded-full bg-gradient-to-r from-[#b40066] via-[#dc1a80] to-[#b5005e] text-white font-bold text-base flex items-center justify-center gap-2 shadow-[0_10px_24px_-4px_rgba(255,61,154,0.36),0_4px_8px_-2px_rgba(41,17,38,0.08)] active:scale-[0.98] transition-transform cursor-pointer disabled:opacity-60"

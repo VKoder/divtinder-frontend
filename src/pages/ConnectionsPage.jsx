@@ -126,7 +126,7 @@ export default function ConnectionsPage() {
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] min-h-screen flex flex-col antialiased selection:bg-[#b40066] selection:text-white">
       {/* Fixed Header */}
       <header className="fixed top-0 inset-x-0 z-50 pt-safe bg-[#fff7fa]/85 backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(41,17,38,0.04)]">
-        <div className="h-16 px-4 max-w-lg mx-auto flex items-center justify-between">
+        <div className="h-16 px-4 max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto flex items-center justify-between">
           {/* User Profile Avatar Link */}
           <button
             onClick={() => navigate("/profile")}
@@ -217,7 +217,7 @@ export default function ConnectionsPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-[#fff7fa] max-w-lg mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-[#fff7fa] max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
         <div className="flex flex-col w-full px-4 space-y-6 pb-8">
           {/* Search Field */}
           <div className="relative w-full pt-2">
@@ -587,7 +587,7 @@ export default function ConnectionsPage() {
       {/* Interactive Chat Drawer */}
       {activeChatConn && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-xs p-0 sm:p-4">
-          <div className="w-full max-w-lg bg-white rounded-t-[32px] sm:rounded-[32px] shadow-2xl flex flex-col h-[82vh] overflow-hidden animate-in slide-in-from-bottom duration-250">
+          <div className="w-full max-w-lg md:max-w-xl bg-white rounded-t-[32px] sm:rounded-[32px] shadow-2xl flex flex-col h-[82vh] overflow-hidden animate-in slide-in-from-bottom duration-250">
             {/* Chat Header */}
             <div className="p-4 bg-[#fff7fa] border-b border-[#e1bdc7]/40 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -694,7 +694,7 @@ export default function ConnectionsPage() {
       {/* Profile Detail Modal */}
       {selectedConnection && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
-          <div className="w-full max-w-sm bg-white rounded-[28px] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="w-full max-w-sm md:max-w-md bg-white rounded-[28px] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="relative h-64 bg-[#ffe7fa]">
               <img
                 alt={selectedConnection.fullName}
@@ -806,7 +806,7 @@ export default function ConnectionsPage() {
       {/* Quick Prompts Modal */}
       {showPromptModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
-          <div className="w-full max-w-sm bg-white rounded-[28px] p-5 shadow-2xl animate-in zoom-in-95 duration-200">
+          <div className="w-full max-w-sm md:max-w-md bg-white rounded-[28px] p-5 shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between pb-3 border-b border-[#e1bdc7]/30">
               <div className="flex items-center gap-2 text-[#b40066]">
                 <span className="material-symbols-outlined text-[22px]">auto_awesome</span>
