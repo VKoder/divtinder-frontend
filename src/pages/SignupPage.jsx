@@ -10,8 +10,6 @@ export default function SignupPage() {
   const [lastName, setLastName] = useState("");
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
-  const [age, setAge] = useState("");
-  const [gender, setGender] = useState("male");
   const [showPassword, setShowPassword] = useState(false);
 
   const { mutate: signup, isPending, error } = useSignup();
@@ -19,19 +17,12 @@ export default function SignupPage() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const payload = {
+    signup({
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       emailId: emailId.trim(),
       password,
-    };
-    if (age) {
-      payload.age = Number(age);
-    }
-    if (gender) {
-      payload.gender = gender;
-    }
-    signup(payload);
+    });
   }
 
   return (
@@ -65,7 +56,7 @@ export default function SignupPage() {
         {/* Clean, high-contrast auth card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_8px_30px_rgba(40,10,30,0.06)] border border-[#e1bdc7]/40">
           <form className="space-y-4" onSubmit={handleSubmit}>
-            {/* Name Fields (Grid) */}
+            {/* First Name & Last Name (Grid) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5 text-left">
                 <label
@@ -148,7 +139,7 @@ export default function SignupPage() {
                   type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
                   required
-                  placeholder="At least 6 characters"
+                  placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full h-11 pl-10 pr-10 rounded-xl border border-[#e1bdc7]/60 bg-[#fff7fa]/50 text-sm text-[#261626] placeholder:text-[#8d6f78]/70 focus:outline-none focus:border-[#b40066] focus:bg-white focus:ring-2 focus:ring-[#b40066]/15 transition-all"
@@ -165,49 +156,6 @@ export default function SignupPage() {
                     <Eye className="w-4 h-4" />
                   )}
                 </button>
-              </div>
-            </div>
-
-            {/* Age & Gender (Optional / Quick setup) */}
-            <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="space-y-1.5 text-left">
-                <label
-                  className="text-xs font-bold text-[#261626] block"
-                  htmlFor="signup-age"
-                >
-                  Age (18+)
-                </label>
-                <input
-                  id="signup-age"
-                  name="age"
-                  type="number"
-                  min="18"
-                  max="100"
-                  placeholder="24"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  className="w-full h-11 px-3.5 rounded-xl border border-[#e1bdc7]/60 bg-[#fff7fa]/50 text-sm text-[#261626] placeholder:text-[#8d6f78]/70 focus:outline-none focus:border-[#b40066] focus:bg-white focus:ring-2 focus:ring-[#b40066]/15 transition-all"
-                />
-              </div>
-
-              <div className="space-y-1.5 text-left">
-                <label
-                  className="text-xs font-bold text-[#261626] block"
-                  htmlFor="signup-gender"
-                >
-                  Gender
-                </label>
-                <select
-                  id="signup-gender"
-                  name="gender"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  className="w-full h-11 px-3 rounded-xl border border-[#e1bdc7]/60 bg-[#fff7fa]/50 text-sm text-[#261626] focus:outline-none focus:border-[#b40066] focus:bg-white focus:ring-2 focus:ring-[#b40066]/15 transition-all cursor-pointer"
-                >
-                  <option value="male">Man</option>
-                  <option value="female">Woman</option>
-                  <option value="others">Other</option>
-                </select>
               </div>
             </div>
 
@@ -264,4 +212,3 @@ export default function SignupPage() {
     </div>
   );
 }
-
