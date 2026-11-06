@@ -6,14 +6,6 @@ import { useLogout } from "@/hooks/useLogout";
 import { useConnections } from "@/hooks/useConnections";
 import logoImg from "@/assets/Logo.png";
 
-const ICEBREAKER_PROMPTS = [
-  "Tabs or spaces? Choose wisely! ⌨️",
-  "What's your ultimate comfort food while debugging? ☕",
-  "Favorite tech stack you've worked with recently? 🚀",
-  "Frontend magic or Backend logic? 💡",
-  "Coffee or Chai during late-night deploys? ☕🍵",
-];
-
 export default function ConnectionsPage() {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
@@ -27,7 +19,6 @@ export default function ConnectionsPage() {
   const [chatMessages, setChatMessages] = useState({});
   const [inputMsg, setInputMsg] = useState("");
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-  const [showPromptModal, setShowPromptModal] = useState(false);
 
   // Normalize connection data
   const connections = useMemo(() => {
@@ -124,8 +115,8 @@ export default function ConnectionsPage() {
 
   return (
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] min-h-screen flex flex-col antialiased selection:bg-[#b40066] selection:text-white">
-      {/* Fixed Header */}
-      <header className="fixed top-0 inset-x-0 z-50 pt-safe bg-[#fff7fa]/85 backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(41,17,38,0.04)]">
+      {/* Mobile-only Header */}
+      <header className="md:hidden fixed top-0 inset-x-0 z-50 pt-safe bg-[#fff7fa]/85 backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(41,17,38,0.04)]">
         <div className="h-16 px-4 max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto flex items-center justify-between">
           {/* User Profile Avatar Link */}
           <button
@@ -317,38 +308,6 @@ export default function ConnectionsPage() {
 
               {/* Horizontal Matches Scroll */}
               <div className="flex items-start gap-4 overflow-x-auto pt-1 pb-2 -mx-4 px-4 select-none scrollbar-none">
-                {/* Match 0: You (Gold Spark Boost) */}
-                <button
-                  onClick={() => toast.info("Boost activated! Your profile is prioritized.")}
-                  className="flex flex-col items-center gap-1.5 flex-shrink-0 group active:scale-95 transition-transform text-left cursor-pointer"
-                >
-                  <div className="relative p-[3px] rounded-full bg-gradient-to-tr from-amber-400 via-amber-200 to-yellow-500 shadow-[0_6px_20px_-2px_rgba(245,158,11,0.35)]">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-[#fce0f7]">
-                      <img
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        alt="Your profile boost"
-                        src={
-                          user?.avatar ||
-                          "https://lh3.googleusercontent.com/aida-public/AB6AXuCBdQAeVOC1sFQzkTBVIn1dqp8bozRVhjf5OJ0tEzuspUvKGrlT1WEg-RSXfcubLIvXjagsRyHASUtywdHMw0FRq1kXWPFBikYtF1VRwVa67DKVUyu2ODN--X9DNVj8fHE6ZMFt0SJ_aVQfn9KZNlQ1bCAJ3x39A-s09wpA5WuehwczxVWIyii0w9Zg2FPJRIrtKmWKkVhrdjuQ-SloI5rLgaUZLC1WXCROOtQWFKQ_"
-                        }
-                      />
-                      <div className="absolute inset-0 bg-[#b40066]/10" />
-                    </div>
-                    <span className="absolute -bottom-1 -right-1 flex items-center justify-center w-6 h-6 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-[#261626] shadow-md">
-                      <span
-                        className="material-symbols-outlined text-[16px] text-white"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        bolt
-                      </span>
-                    </span>
-                  </div>
-                  <span className="font-['Sora',sans-serif] text-[13px] text-[#261626] font-bold text-center">
-                    You
-                  </span>
-                  <span className="text-[11px] text-[#8d6f78] -mt-1 font-medium">Boost</span>
-                </button>
-
                 {/* Real Connections from API */}
                 {filteredConnections.map((conn) => (
                   <button
@@ -557,30 +516,6 @@ export default function ConnectionsPage() {
             </section>
           )}
 
-          {/* Moment of Delight: Gentle Safety / Icebreaker Cue Card */}
-          <div className="relative overflow-hidden rounded-3xl p-5 bg-gradient-to-br from-[#ffe7fa] via-[#ffeffa] to-[#ffd9e3]/40 shadow-[0_8px_30px_-6px_rgba(255,61,154,0.12)] border border-[#ffd9e3]/60">
-            <div className="flex items-start gap-4">
-              <div className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white text-[#b40066] shadow-sm flex-shrink-0">
-                <span className="material-symbols-outlined text-[24px]">auto_awesome</span>
-              </div>
-              <div className="flex flex-col flex-1">
-                <h4 className="font-['Sora',sans-serif] text-[15px] leading-[20px] text-[#261626] font-bold">
-                  Spark the connection
-                </h4>
-                <p className="text-[13px] leading-[18px] text-[#594048] mt-1 leading-relaxed">
-                  Matches who exchange a message within the first 2 hours are 4x more likely to grab coffee together.
-                </p>
-                <div className="mt-3 flex items-center gap-2">
-                  <button
-                    onClick={() => setShowPromptModal(true)}
-                    className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-[#b40066] text-white text-[13px] font-bold shadow-[0_8px_20px_-4px_rgba(180,0,102,0.4)] active:scale-95 transition-transform cursor-pointer"
-                  >
-                    Try a Quick Prompt
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
 
@@ -798,53 +733,6 @@ export default function ConnectionsPage() {
                 <span className="material-symbols-outlined text-[18px]">chat</span>
                 <span>Send Message</span>
               </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Quick Prompts Modal */}
-      {showPromptModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xs p-4">
-          <div className="w-full max-w-sm md:max-w-md bg-white rounded-[28px] p-5 shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-3 border-b border-[#e1bdc7]/30">
-              <div className="flex items-center gap-2 text-[#b40066]">
-                <span className="material-symbols-outlined text-[22px]">auto_awesome</span>
-                <h3 className="font-['Sora',sans-serif] text-base font-bold text-[#261626]">
-                  Quick Icebreakers
-                </h3>
-              </div>
-              <button
-                onClick={() => setShowPromptModal(false)}
-                className="w-8 h-8 rounded-full bg-[#ffe7fa] flex items-center justify-center text-[#8d6f78] cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-[18px]">close</span>
-              </button>
-            </div>
-            <p className="text-xs text-[#594048] my-3">
-              Tap any prompt to copy or start a conversation with your matches:
-            </p>
-            <div className="space-y-2">
-              {ICEBREAKER_PROMPTS.map((prompt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    navigator.clipboard?.writeText(prompt);
-                    toast.success("Prompt copied to clipboard!");
-                    setShowPromptModal(false);
-                    if (connections.length > 0) {
-                      setActiveChatConn(connections[0]);
-                      setInputMsg(prompt);
-                    }
-                  }}
-                  className="w-full text-left p-3 rounded-2xl bg-[#ffeffa] hover:bg-[#ffd9e3]/60 text-xs font-semibold text-[#261626] transition-colors cursor-pointer border border-[#e1bdc7]/40 flex items-center justify-between group"
-                >
-                  <span>{prompt}</span>
-                  <span className="material-symbols-outlined text-[16px] text-[#b40066] opacity-0 group-hover:opacity-100 transition-opacity">
-                    arrow_forward
-                  </span>
-                </button>
-              ))}
             </div>
           </div>
         </div>

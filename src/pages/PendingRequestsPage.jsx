@@ -13,7 +13,6 @@ export default function PendingRequestsPage() {
   const { data: rawRequests = [], isLoading, isError, refetch } = usePendingRequests();
   const { mutate: reviewReq, isPending: isReviewing } = useReviewRequest();
 
-  const [activeTab, setActiveTab] = useState("received"); // "received" | "sent"
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [processingId, setProcessingId] = useState(null);
@@ -56,7 +55,6 @@ export default function PendingRequestsPage() {
       about: profile.about || "New to devBumble",
       bio: profile.bio || "Hello! Excited to connect on devBumble.",
       skills: profile.skills || [],
-      isSuperLike: idx % 3 === 1,
     };
   });
 
@@ -80,8 +78,8 @@ export default function PendingRequestsPage() {
 
   return (
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] antialiased flex flex-col min-h-screen selection:bg-[#b40066] selection:text-white select-none">
-      {/* Header */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
+      {/* Mobile-only Header */}
+      <header className="md:hidden fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
         <div className="h-16 px-4 flex items-center justify-between max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
           {/* User Profile Link */}
           <button
@@ -175,49 +173,21 @@ export default function PendingRequestsPage() {
       {/* Main Container */}
       <main className="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-[#fff7fa] max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
         <div className="flex flex-col w-full px-4 pb-8">
-          {/* Segmented Top Tabs */}
-          <div className="w-full pt-2 pb-3">
-            <div className="flex p-1 bg-[#ffe7fa] rounded-full shadow-inner max-w-xs mx-auto border border-[#e1bdc7]/30">
-              <button
-                onClick={() => setActiveTab("received")}
-                className={`flex-1 py-2 px-3 rounded-full text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${
-                  activeTab === "received"
-                    ? "bg-white text-[#b40066] shadow-sm"
-                    : "text-[#594048] hover:text-[#261626]"
-                }`}
-              >
-                <span>Received</span>
-                <span className="px-1.5 py-0.5 rounded-full bg-[#ffd9e3] text-[#3e001f] text-[10px] leading-none font-extrabold">
-                  {requests.length}
-                </span>
-              </button>
-              <button
-                onClick={() => {
-                  setActiveTab("sent");
-                  toast.info("Sent requests history coming soon!");
-                }}
-                className={`flex-1 py-2 px-3 rounded-full text-xs font-bold transition-all duration-200 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${
-                  activeTab === "sent"
-                    ? "bg-white text-[#b40066] shadow-sm"
-                    : "text-[#594048] hover:text-[#261626]"
-                }`}
-              >
-                <span>Sent</span>
-                <span className="px-1.5 py-0.5 rounded-full bg-[#f6daf1] text-[#594048] text-[10px] leading-none font-extrabold">
-                  0
-                </span>
-              </button>
-            </div>
-          </div>
-
           {/* Header & Context */}
-          <div className="flex flex-col gap-0.5 pt-1 pb-4">
-            <h1 className="font-['Sora',sans-serif] text-xl sm:text-[22px] leading-tight font-bold text-[#261626] tracking-tight">
-              People who liked your profile
-            </h1>
-            <p className="text-xs text-[#594048]">
-              Tap to inspect or choose an action to decide your spark.
-            </p>
+          <div className="flex items-center justify-between pt-4 pb-3">
+            <div>
+              <h1 className="font-['Sora',sans-serif] text-xl sm:text-2xl leading-tight font-bold text-[#261626] tracking-tight">
+                Connection Requests
+              </h1>
+              <p className="text-xs text-[#594048] mt-0.5">
+                Developers who want to connect with you.
+              </p>
+            </div>
+            {requests.length > 0 && (
+              <span className="px-3 py-1 rounded-full bg-[#ffd9e3] text-[#b40066] text-xs font-bold shadow-xs">
+                {requests.length} pending
+              </span>
+            )}
           </div>
 
           {/* Loading State */}
@@ -275,29 +245,17 @@ export default function PendingRequestsPage() {
                     {/* Gradient Scrim for Contrast */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#261626]/95 via-[#261626]/40 to-transparent pointer-events-none" />
 
-                    {/* Top Tag: Super Like or Verified */}
+                    {/* Top Tag: Verified */}
                     <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
-                      {req.isSuperLike ? (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#dc1a80] text-white text-[10px] font-bold shadow-sm">
-                          <span
-                            className="material-symbols-outlined text-[13px]"
-                            style={{ fontVariationSettings: "'FILL' 1" }}
-                          >
-                            bolt
-                          </span>
-                          Super Like
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#261626]/60 backdrop-blur-md text-white text-[10px] font-bold">
+                        <span
+                          className="material-symbols-outlined text-[13px] text-[#0095F6]"
+                          style={{ fontVariationSettings: "'FILL' 1" }}
+                        >
+                          verified
                         </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#261626]/60 backdrop-blur-md text-white text-[10px] font-bold">
-                          <span
-                            className="material-symbols-outlined text-[13px] text-[#0095F6]"
-                            style={{ fontVariationSettings: "'FILL' 1" }}
-                          >
-                            verified
-                          </span>
-                          Verified
-                        </span>
-                      )}
+                        Verified
+                      </span>
                     </div>
 
                     {/* Processing Overlay */}

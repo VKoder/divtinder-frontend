@@ -61,7 +61,6 @@ export default function FeedPage() {
   const { mutate: sendRequest } = useSendConnectionRequest();
 
   const [profiles, setProfiles] = useState([]);
-  const [history, setHistory] = useState([]);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("discover");
@@ -103,7 +102,7 @@ export default function FeedPage() {
 
     const toUserId = currentProfile.id;
 
-    if (type === "like" || type === "superlike") {
+    if (type === "like") {
       // Backend expects status: "interested"
       sendRequest({ status: "interested", toUserId });
     } else if (type === "nope") {
@@ -112,22 +111,9 @@ export default function FeedPage() {
       toast.info(`Passed on ${currentProfile.name}`);
     }
 
-    setHistory((prev) => [currentProfile, ...prev]);
     setProfiles((prev) => prev.slice(1));
     setCurrentImgIndex(0); // Reset to first photo of next profile
     setIsDrawerOpen(false);
-  };
-
-  const handleRewind = () => {
-    if (history.length === 0) {
-      toast.info("No previous profiles to rewind.");
-      return;
-    }
-    const last = history[0];
-    setHistory((prev) => prev.slice(1));
-    setProfiles((prev) => [last, ...prev]);
-    setCurrentImgIndex(0); // Reset to first photo of restored profile
-    toast.success(`Restored ${last.name}`);
   };
 
   const handleDragEnd = (e, info) => {
@@ -140,8 +126,8 @@ export default function FeedPage() {
 
   return (
     <div className="bg-[#fff7fa] font-['Plus_Jakarta_Sans',sans-serif] text-[#261626] antialiased flex flex-col min-h-screen select-none">
-      {/* Header */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
+      {/* Mobile-only Header */}
+      <header className="md:hidden fixed top-0 inset-x-0 z-50 bg-[#fff7fa]/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(41,17,38,0.04)]">
         <div className="h-16 px-4 flex items-center justify-between max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
           {/* User profile avatar / name */}
           <button
@@ -450,82 +436,40 @@ export default function FeedPage() {
             )}
           </div>
 
-          {/* Tinder-style Action Cluster */}
-          <div className="w-full max-w-[380px] mx-auto mt-4 flex items-center justify-center gap-5">
-            {/* Rewind Button */}
-            <div className="relative flex flex-col items-center">
-              <button
-                onClick={handleRewind}
-                disabled={history.length === 0}
-                aria-label="Rewind card"
-                className="w-12 h-12 rounded-full bg-white text-[#8d6f78] shadow-sm flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer active:scale-90"
-              >
-                <span className="material-symbols-outlined text-[22px]">replay</span>
-              </button>
-              <span className="absolute -bottom-4 text-[9px] uppercase tracking-wide font-bold text-[#8d6f78]/60 whitespace-nowrap">
-                Rewind
-              </span>
-            </div>
-
+          {/* Pass & Like Action Cluster */}
+          <div className="w-full max-w-[280px] mx-auto mt-6 flex items-center justify-center gap-8">
             {/* Nope Action Button */}
-            <button
-              onClick={() => triggerAction("nope")}
-              disabled={!currentProfile}
-              aria-label="Pass profile"
-              className="w-16 h-16 rounded-full bg-white text-[#c54d46] shadow-[0_8px_20px_rgba(197,77,70,0.18)] hover:bg-[#ffeffa] active:scale-90 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40"
-            >
-              <span className="material-symbols-outlined text-[32px] font-bold">close</span>
-            </button>
-
-            {/* Super Star / Boost Button */}
-            <div className="relative flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <button
-                onClick={() => triggerAction("superlike")}
+                onClick={() => triggerAction("nope")}
                 disabled={!currentProfile}
-                aria-label="Super Like"
-                className="w-12 h-12 rounded-full bg-white text-[#3794FF] shadow-sm hover:bg-[#ffeffa] active:scale-90 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40"
+                aria-label="Pass profile"
+                className="w-16 h-16 rounded-full bg-white text-[#c54d46] shadow-[0_8px_20px_rgba(197,77,70,0.18)] hover:bg-[#ffdad6]/20 active:scale-90 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40"
               >
-                <span
-                  className="material-symbols-outlined text-[24px]"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  star
-                </span>
+                <span className="material-symbols-outlined text-[32px] font-bold">close</span>
               </button>
-              <span className="absolute -top-2.5 px-1.5 py-0.5 rounded-full bg-[#ffd9e3] text-[#3e001f] text-[8px] uppercase tracking-wider font-bold shadow-sm">
-                Soon
-              </span>
-              <span className="absolute -bottom-4 text-[9px] uppercase tracking-wide font-bold text-[#8d6f78]/80 whitespace-nowrap">
-                Super
+              <span className="text-[10px] uppercase tracking-wide font-bold text-[#8d6f78] mt-2">
+                Pass
               </span>
             </div>
 
             {/* Like Action Button */}
-            <button
-              onClick={() => triggerAction("like")}
-              disabled={!currentProfile}
-              aria-label="Like profile"
-              className="w-16 h-16 rounded-full bg-white text-[#dd1d77] shadow-[0_10px_24px_-4px_rgba(221,29,119,0.28)] hover:bg-[#ffeffa] active:scale-90 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40"
-            >
-              <span
-                className="material-symbols-outlined text-[34px]"
-                style={{ fontVariationSettings: "'FILL' 1" }}
-              >
-                favorite
-              </span>
-            </button>
-
-            {/* Boost Button */}
-            <div className="relative flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <button
-                onClick={() => toast.info("Lightning Boost coming soon!")}
-                aria-label="Lightning Boost"
-                className="w-12 h-12 rounded-full bg-white text-[#9945FF] shadow-sm hover:bg-[#ffeffa] active:scale-90 flex items-center justify-center transition-all cursor-pointer"
+                onClick={() => triggerAction("like")}
+                disabled={!currentProfile}
+                aria-label="Like profile"
+                className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#b40066] to-[#dd1d77] text-white shadow-[0_10px_24px_-4px_rgba(221,29,119,0.35)] hover:opacity-95 active:scale-90 flex items-center justify-center transition-all cursor-pointer disabled:opacity-40"
               >
-                <span className="material-symbols-outlined text-[22px]">bolt</span>
+                <span
+                  className="material-symbols-outlined text-[32px]"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  favorite
+                </span>
               </button>
-              <span className="absolute -bottom-4 text-[9px] uppercase tracking-wide font-bold text-[#8d6f78]/80 whitespace-nowrap">
-                Boost
+              <span className="text-[10px] uppercase tracking-wide font-bold text-[#b40066] mt-2">
+                Connect
               </span>
             </div>
           </div>

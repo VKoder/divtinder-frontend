@@ -321,7 +321,7 @@ export default function LandingPage() {
           style={{ boxShadow: "0 12px 36px -6px rgba(180, 0, 102, 0.45)" }}
           whileHover={{ scale: 1.015 }}
           whileTap={{ scale: 0.97 }}
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signup")}
         >
           <span className="relative z-10 flex items-center gap-2 group-hover:translate-x-0.5 transition-transform">
             Create account

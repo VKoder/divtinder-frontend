@@ -5,6 +5,7 @@ import ConnectionsPage from "./pages/ConnectionsPage.jsx";
 import FeedPage from "./pages/FeedPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
+import SignupPage from "./pages/SignupPage.jsx";
 import PendingRequestsPage from "./pages/PendingRequestsPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ProtectedRoute from "./components/routes/ProtectedRoute.jsx";
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route element={<AuthLayout />}>
             <Route path="login" element={<LoginPage />} />
+            <Route path="signup" element={<SignupPage />} />
           </Route>
         </Route>
 
